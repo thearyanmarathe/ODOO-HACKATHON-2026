@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/authMiddleware");
-const { getTripSummary } = require("../controllers/tripController");
 const {
   createTrip,
   getTrips,
   updateTrip,
   deleteTrip,
+  getTripSummary,
 } = require("../controllers/tripController");
 
 router.post("/", auth, createTrip);

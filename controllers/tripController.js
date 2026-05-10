@@ -1,4 +1,6 @@
 const Trip = require("../models/Trip");
+const Itinerary = require("../models/Itinerary");
+const Budget = require("../models/Budget");
 
 // Create Trip
 exports.createTrip = async (req, res) => {
@@ -30,8 +32,6 @@ exports.deleteTrip = async (req, res) => {
   await Trip.findByIdAndDelete(req.params.id);
   res.json({ message: "Deleted" });
 };
-const Itinerary = require("../models/Itinerary");
-const Budget = require("../models/Budget");
 
 // Get Full Trip Summary
 exports.getTripSummary = async (req, res) => {
