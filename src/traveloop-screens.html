@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Traveloop – Remaining Screens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --cream:#FBF8F2;
+  --warm-white:#FFFFFF;
+  --ink:#1A1612;
+  --ink-60:#6B6158;
+  --ink-30:#C2B9AE;
+  --ink-10:#EDE8E1;
+  --amber:#F5A623;
+  --amber-light:#FEF3DB;
+  --amber-dark:#C7851C;
+  --teal:#1DB88A;
+  --teal-light:#E1F5EE;
+  --teal-dark:#0F6E56;
+  --coral:#D85A30;
+  --coral-light:#FAECE7;
+  --blue:#2563EB;
+  --blue-light:#EEF3FF;
+  --radius-sm:8px;
+  --radius-md:12px;
+  --radius-lg:18px;
+  --radius-xl:24px;
+  --shadow-sm:0 1px 3px rgba(26,22,18,0.08);
+  --shadow-md:0 4px 16px rgba(26,22,18,0.1);
+}
+
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  min-height:100vh;
+  font-size:15px;
+}
+
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--warm-white);
+  border-bottom:1px solid var(--ink-10);
+  padding:0 24px;
+  display:flex;align-items:center;gap:8px;
+  height:58px;
+}
+.nav-logo{
+  font-family:'DM Serif Display',serif;
+  font-size:22px;color:var(--ink);
+  letter-spacing:-0.5px;
+  margin-right:auto;
+}
+.nav-logo span{color:var(--amber);}
+.nav-tab{
+  padding:7px 16px;
+  border-radius:100px;
+  border:none;background:none;
+  font-family:'DM Sans',sans-serif;
+  font-size:13px;font-weight:500;
+  color:var(--ink-60);cursor:pointer;
+  transition:all 0.18s;white-space:nowrap;
+}
+.nav-tab:hover{background:var(--ink-10);color:var(--ink);}
+.nav-tab.active{background:var(--ink);color:var(--warm-white);}
+
+/* SCREENS */
+.screen{display:none;padding:32px 24px 60px;max-width:800px;margin:0 auto;}
+.screen.active{display:block;}
+
+/* SECTION LABEL */
+.screen-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--amber-light);
+  color:var(--amber-dark);
+  font-size:12px;font-weight:600;
+  letter-spacing:0.04em;text-transform:uppercase;
+  padding:4px 12px;border-radius:100px;
+  margin-bottom:16px;
+}
+.screen-title{
+  font-family:'DM Serif Display',serif;
+  font-size:32px;line-height:1.15;
+  color:var(--ink);margin-bottom:6px;
+}
+.screen-sub{font-size:15px;color:var(--ink-60);margin-bottom:32px;}
+
+/* CARDS */
+.card{
+  background:var(--warm-white);
+  border:1px solid var(--ink-10);
+  border-radius:var(--radius-lg);
+  padding:20px;
+  margin-bottom:16px;
+}
+.card-sm{
+  background:var(--warm-white);
+  border:1px solid var(--ink-10);
+  border-radius:var(--radius-md);
+  padding:14px 16px;
+}
+
+/* BUTTONS */
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:10px 20px;
+  border-radius:100px;border:none;
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;font-weight:500;
+  cursor:pointer;transition:all 0.18s;
+}
+.btn-primary{background:var(--ink);color:var(--warm-white);}
+.btn-primary:hover{background:#333028;}
+.btn-amber{background:var(--amber);color:var(--warm-white);}
+.btn-amber:hover{background:var(--amber-dark);}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--ink-10);}
+.btn-ghost:hover{background:var(--ink-10);}
+.btn-teal{background:var(--teal);color:var(--warm-white);}
+.btn-teal:hover{background:var(--teal-dark);}
+.btn-sm{padding:6px 14px;font-size:13px;}
+
+/* INPUTS */
+input[type=text],input[type=search],textarea,select{
+  width:100%;padding:10px 14px;
+  border:1px solid var(--ink-10);
+  border-radius:var(--radius-sm);
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;color:var(--ink);
+  background:var(--warm-white);
+  outline:none;transition:border 0.15s;
+}
+input:focus,textarea:focus,select:focus{border-color:var(--amber);}
+textarea{resize:vertical;min-height:90px;line-height:1.6;}
+
+/* TAGS/CHIPS */
+.chip{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:4px 12px;border-radius:100px;
+  font-size:12px;font-weight:500;
+  border:1px solid transparent;cursor:pointer;transition:all 0.15s;
+}
+.chip-outline{background:transparent;border-color:var(--ink-20,var(--ink-30));color:var(--ink-60);}
+.chip-outline:hover,.chip-outline.active{background:var(--ink);color:var(--warm-white);border-color:var(--ink);}
+.chip-teal{background:var(--teal-light);color:var(--teal-dark);}
+.chip-amber{background:var(--amber-light);color:var(--amber-dark);}
+.chip-coral{background:var(--coral-light);color:var(--coral);}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--ink-10);margin:20px 0;}
+
+/* ===================== SCREEN 6 – ITINERARY VIEW ===================== */
+.timeline-wrap{position:relative;padding-left:28px;}
+.timeline-line{
+  position:absolute;left:10px;top:8px;bottom:8px;
+  width:2px;background:var(--ink-10);border-radius:2px;
+}
+.timeline-day{position:relative;margin-bottom:28px;}
+.tl-dot{
+  position:absolute;left:-28px;top:4px;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--amber);
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;font-weight:700;color:var(--warm-white);
+}
+.tl-city{
+  font-size:11px;font-weight:600;letter-spacing:0.06em;
+  text-transform:uppercase;color:var(--ink-60);margin-bottom:2px;
+}
+.tl-date{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:12px;}
+.activity-block{
+  display:flex;align-items:flex-start;gap:12px;
+  background:var(--cream);
+  border-radius:var(--radius-md);padding:12px 14px;
+  margin-bottom:8px;
+}
+.activity-time{
+  font-size:12px;color:var(--ink-60);font-weight:500;
+  min-width:52px;padding-top:1px;
+}
+.activity-info{flex:1;}
+.activity-name{font-size:14px;font-weight:500;color:var(--ink);}
+.activity-meta{font-size:12px;color:var(--ink-60);margin-top:2px;}
+.activity-cost{
+  font-size:13px;font-weight:600;color:var(--teal-dark);
+  white-space:nowrap;
+}
+.view-toggle{display:flex;gap:6px;margin-bottom:24px;}
+.view-btn{
+  padding:7px 16px;border-radius:100px;
+  border:1px solid var(--ink-10);background:transparent;
+  font-family:'DM Sans',sans-serif;font-size:13px;
+  font-weight:500;color:var(--ink-60);cursor:pointer;transition:all 0.15s;
+}
+.view-btn.active,.view-btn:hover{background:var(--ink);color:#fff;border-color:var(--ink);}
+
+.summary-strip{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+  margin-bottom:28px;
+}
+.summary-cell{
+  background:var(--warm-white);border:1px solid var(--ink-10);
+  border-radius:var(--radius-md);padding:14px;text-align:center;
+}
+.summary-cell .val{font-size:22px;font-weight:700;color:var(--ink);}
+.summary-cell .lbl{font-size:11px;color:var(--ink-60);font-weight:500;margin-top:2px;letter-spacing:0.03em;}
+
+/* ===================== SCREEN 7 – CITY SEARCH ===================== */
+.search-box{
+  display:flex;gap:10px;align-items:center;margin-bottom:20px;
+}
+.search-input-wrap{
+  flex:1;position:relative;
+}
+.search-input-wrap i{
+  position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  color:var(--ink-30);font-size:16px;
+}
+.search-input-wrap input{padding-left:40px;}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+.city-card{
+  display:flex;align-items:center;gap:16px;
+  background:var(--warm-white);
+  border:1px solid var(--ink-10);
+  border-radius:var(--radius-lg);
+  padding:16px;margin-bottom:12px;
+  transition:box-shadow 0.15s,border-color 0.15s;
+  cursor:pointer;
+}
+.city-card:hover{box-shadow:var(--shadow-md);border-color:var(--ink-30);}
+.city-thumb{
+  width:68px;height:68px;border-radius:var(--radius-md);
+  object-fit:cover;flex-shrink:0;
+  background:var(--ink-10);display:flex;align-items:center;
+  justify-content:center;font-size:28px;
+}
+.city-meta{flex:1;}
+.city-name{font-size:16px;font-weight:600;color:var(--ink);}
+.city-country{font-size:12px;color:var(--ink-60);margin-bottom:8px;}
+.city-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.badge{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:3px 9px;border-radius:100px;font-size:11px;font-weight:600;
+}
+.badge-teal{background:var(--teal-light);color:var(--teal-dark);}
+.badge-amber{background:var(--amber-light);color:var(--amber-dark);}
+.badge-coral{background:var(--coral-light);color:var(--coral);}
+.add-btn{
+  flex-shrink:0;padding:8px 16px;
+  border-radius:100px;border:1px solid var(--ink-10);
+  background:transparent;font-family:'DM Sans',sans-serif;
+  font-size:13px;font-weight:500;cursor:pointer;
+  transition:all 0.15s;color:var(--ink);
+}
+.add-btn:hover,.add-btn.added{background:var(--teal);color:#fff;border-color:var(--teal);}
+
+/* ===================== SCREEN 10 – PACKING ===================== */
+.checklist-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:16px;
+}
+.progress-bar{
+  height:6px;background:var(--ink-10);border-radius:3px;margin-bottom:24px;overflow:hidden;
+}
+.progress-fill{
+  height:100%;background:var(--teal);border-radius:3px;transition:width 0.4s ease;
+}
+.category-section{margin-bottom:24px;}
+.cat-label{
+  font-size:11px;font-weight:700;letter-spacing:0.07em;
+  text-transform:uppercase;color:var(--ink-30);
+  margin-bottom:10px;display:flex;align-items:center;gap:8px;
+}
+.cat-label::after{content:'';flex:1;height:1px;background:var(--ink-10);}
+.check-item{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 14px;border-radius:var(--radius-sm);
+  transition:background 0.12s;cursor:pointer;
+  border:1px solid transparent;
+}
+.check-item:hover{background:var(--ink-10);}
+.check-item.packed{opacity:0.5;}
+.custom-check{
+  width:20px;height:20px;border-radius:5px;
+  border:1.5px solid var(--ink-30);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.15s;
+}
+.check-item.packed .custom-check{
+  background:var(--teal);border-color:var(--teal);
+}
+.check-item.packed .custom-check::after{
+  content:'✓';font-size:11px;color:#fff;font-weight:700;
+}
+.check-item-name{font-size:14px;color:var(--ink);flex:1;}
+.check-item.packed .check-item-name{text-decoration:line-through;color:var(--ink-60);}
+.del-btn{
+  background:none;border:none;color:var(--ink-30);
+  cursor:pointer;font-size:16px;padding:2px 4px;
+  transition:color 0.12s;
+}
+.del-btn:hover{color:var(--coral);}
+.add-item-row{display:flex;gap:8px;margin-top:12px;}
+.add-item-row input{flex:1;}
+
+/* ===================== SCREEN 11 – SHARED ===================== */
+.shared-hero{
+  background:var(--ink);
+  border-radius:var(--radius-xl);
+  padding:28px 28px 24px;
+  margin-bottom:28px;
+  position:relative;overflow:hidden;
+}
+.shared-hero::before{
+  content:'✈';
+  position:absolute;right:28px;top:50%;transform:translateY(-50%);
+  font-size:80px;opacity:0.07;
+}
+.shared-trip-name{
+  font-family:'DM Serif Display',serif;
+  font-size:28px;color:var(--warm-white);margin-bottom:4px;
+}
+.shared-meta{font-size:13px;color:rgba(255,255,255,0.6);}
+.shared-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
+  margin-top:20px;
+}
+.shared-stat{
+  background:rgba(255,255,255,0.08);
+  border-radius:var(--radius-sm);
+  padding:12px;text-align:center;
+}
+.shared-stat .n{font-size:20px;font-weight:700;color:var(--warm-white);}
+.shared-stat .l{font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.05em;margin-top:2px;}
+.share-bar{
+  display:flex;gap:8px;flex-wrap:wrap;align-items:center;
+  background:var(--warm-white);border:1px solid var(--ink-10);
+  border-radius:var(--radius-md);padding:12px 14px;
+  margin-bottom:24px;
+}
+.share-url{
+  flex:1;font-size:12px;color:var(--ink-60);
+  background:var(--cream);border-radius:var(--radius-sm);
+  padding:8px 12px;font-family:monospace;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.stop-card{
+  display:flex;gap:14px;align-items:flex-start;
+  background:var(--warm-white);border:1px solid var(--ink-10);
+  border-radius:var(--radius-lg);padding:16px;
+  margin-bottom:12px;
+}
+.stop-num{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--amber-light);color:var(--amber-dark);
+  font-weight:700;font-size:13px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.stop-info{flex:1;}
+.stop-city{font-size:15px;font-weight:600;color:var(--ink);}
+.stop-dates{font-size:12px;color:var(--ink-60);margin-top:2px;}
+.stop-acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.copy-trip-btn{
+  display:flex;align-items:center;gap:8px;
+  background:var(--amber);color:var(--warm-white);
+  border:none;border-radius:100px;
+  padding:12px 28px;font-family:'DM Sans',sans-serif;
+  font-size:15px;font-weight:600;cursor:pointer;
+  transition:all 0.15s;
+}
+.copy-trip-btn:hover{background:var(--amber-dark);}
+
+/* ===================== SCREEN 13 – NOTES ===================== */
+.notes-toolbar{
+  display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap;
+}
+.note-card{
+  background:var(--warm-white);border:1px solid var(--ink-10);
+  border-radius:var(--radius-lg);padding:18px 20px;
+  margin-bottom:12px;cursor:pointer;
+  transition:box-shadow 0.15s,border-color 0.15s;
+}
+.note-card:hover{box-shadow:var(--shadow-md);border-color:var(--ink-30);}
+.note-card.editing{border-color:var(--amber);box-shadow:0 0 0 3px var(--amber-light);}
+.note-stop{
+  font-size:11px;font-weight:600;letter-spacing:0.05em;
+  text-transform:uppercase;color:var(--ink-60);margin-bottom:4px;
+}
+.note-title{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.note-body{font-size:13px;color:var(--ink-60);line-height:1.6;}
+.note-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:12px;padding-top:10px;border-top:1px solid var(--ink-10);
+}
+.note-ts{font-size:11px;color:var(--ink-30);}
+.note-actions{display:flex;gap:6px;}
+.icon-btn{
+  width:30px;height:30px;border-radius:50%;
+  border:1px solid var(--ink-10);background:transparent;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:13px;color:var(--ink-60);
+  transition:all 0.12s;
+}
+.icon-btn:hover{background:var(--ink);color:#fff;border-color:var(--ink);}
+.new-note-form{
+  background:var(--amber-light);border:1.5px dashed var(--amber);
+  border-radius:var(--radius-lg);padding:18px 20px;
+  margin-bottom:20px;
+}
+.new-note-form input[type=text]{margin-bottom:10px;}
+.note-foot-bar{display:flex;align-items:center;justify-content:space-between;margin-top:12px;}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:24px;right:24px;
+  background:var(--ink);color:var(--warm-white);
+  padding:12px 20px;border-radius:100px;
+  font-size:13px;font-weight:500;
+  opacity:0;transform:translateY(8px);
+  transition:all 0.25s;pointer-events:none;z-index:999;
+}
+.toast.show{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-logo">travel<span>oop</span></span>
+  <button class="nav-tab active" onclick="show('s6')">Itinerary View</button>
+  <button class="nav-tab" onclick="show('s7')">City Search</button>
+  <button class="nav-tab" onclick="show('s10')">Packing</button>
+  <button class="nav-tab" onclick="show('s11')">Shared View</button>
+  <button class="nav-tab" onclick="show('s13')">Notes</button>
+</nav>
+
+<!-- =================== SCREEN 6: ITINERARY VIEW =================== -->
+<div class="screen active" id="s6">
+  <div class="screen-badge"><i class="fa-solid fa-route"></i> Screen 6</div>
+  <h1 class="screen-title">Itinerary View</h1>
+  <p class="screen-sub">Full timeline of your Europe Grand Tour – read-only overview.</p>
+
+  <div class="summary-strip">
+    <div class="summary-cell"><div class="val">12</div><div class="lbl">Total Days</div></div>
+    <div class="summary-cell"><div class="val">4</div><div class="lbl">Cities</div></div>
+    <div class="summary-cell"><div class="val" style="color:var(--teal-dark)">$2,840</div><div class="lbl">Est. Budget</div></div>
+  </div>
+
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+    <div class="view-toggle">
+      <button class="view-btn active" onclick="setView(this,'timeline')">Timeline</button>
+      <button class="view-btn" onclick="setView(this,'calendar')">Calendar</button>
+      <button class="view-btn" onclick="setView(this,'list')">List</button>
+    </div>
+    <button class="btn btn-ghost btn-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> Share</button>
+  </div>
+
+  <div class="timeline-wrap">
+    <div class="timeline-line"></div>
+
+    <!-- Paris -->
+    <div class="timeline-day">
+      <div class="tl-dot">1</div>
+      <div class="tl-city">France</div>
+      <div class="tl-date">Paris · Jun 1 – Jun 4</div>
+      <div class="activity-block">
+        <div class="activity-time">09:00</div>
+        <div class="activity-info">
+          <div class="activity-name">Eiffel Tower Visit</div>
+          <div class="activity-meta">Landmark · 2.5 hrs · Champ de Mars</div>
+        </div>
+        <div class="activity-cost">$28</div>
+      </div>
+      <div class="activity-block">
+        <div class="activity-time">13:00</div>
+        <div class="activity-info">
+          <div class="activity-name">Louvre Museum</div>
+          <div class="activity-meta">Museum · 3 hrs · 1st arr.</div>
+        </div>
+        <div class="activity-cost">$22</div>
+      </div>
+      <div class="activity-block">
+        <div class="activity-time">19:30</div>
+        <div class="activity-info">
+          <div class="activity-name">Seine River Dinner Cruise</div>
+          <div class="activity-meta">Food & Experience · 2 hrs</div>
+        </div>
+        <div class="activity-cost">$75</div>
+      </div>
+    </div>
+
+    <!-- Amsterdam -->
+    <div class="timeline-day">
+      <div class="tl-dot">2</div>
+      <div class="tl-city">Netherlands</div>
+      <div class="tl-date">Amsterdam · Jun 5 – Jun 7</div>
+      <div class="activity-block">
+        <div class="activity-time">10:00</div>
+        <div class="activity-info">
+          <div class="activity-name">Anne Frank House</div>
+          <div class="activity-meta">Historical · 1.5 hrs · Jordaan</div>
+        </div>
+        <div class="activity-cost">$16</div>
+      </div>
+      <div class="activity-block">
+        <div class="activity-time">14:00</div>
+        <div class="activity-info">
+          <div class="activity-name">Canal Boat Tour</div>
+          <div class="activity-meta">Experience · 1 hr · City Centre</div>
+        </div>
+        <div class="activity-cost">$19</div>
+      </div>
+    </div>
+
+    <!-- Prague -->
+    <div class="timeline-day">
+      <div class="tl-dot">3</div>
+      <div class="tl-city">Czech Republic</div>
+      <div class="tl-date">Prague · Jun 8 – Jun 10</div>
+      <div class="activity-block">
+        <div class="activity-time">09:30</div>
+        <div class="activity-info">
+          <div class="activity-name">Prague Castle Tour</div>
+          <div class="activity-meta">Landmark · 3 hrs · Hradčany</div>
+        </div>
+        <div class="activity-cost">$14</div>
+      </div>
+      <div class="activity-block">
+        <div class="activity-time">15:00</div>
+        <div class="activity-info">
+          <div class="activity-name">Old Town Square Walk</div>
+          <div class="activity-meta">Sightseeing · Free</div>
+        </div>
+        <div class="activity-cost">Free</div>
+      </div>
+    </div>
+
+    <!-- Vienna -->
+    <div class="timeline-day">
+      <div class="tl-dot">4</div>
+      <div class="tl-city">Austria</div>
+      <div class="tl-date">Vienna · Jun 11 – Jun 12</div>
+      <div class="activity-block">
+        <div class="activity-time">10:00</div>
+        <div class="activity-info">
+          <div class="activity-name">Schönbrunn Palace</div>
+          <div class="activity-meta">Landmark · 2.5 hrs · Hietzing</div>
+        </div>
+        <div class="activity-cost">$24</div>
+      </div>
+      <div class="activity-block">
+        <div class="activity-time">20:00</div>
+        <div class="activity-info">
+          <div class="activity-name">Vienna Philharmonic Concert</div>
+          <div class="activity-meta">Culture · 2 hrs · Musikverein</div>
+        </div>
+        <div class="activity-cost">$65</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== SCREEN 7: CITY SEARCH =================== -->
+<div class="screen" id="s7">
+  <div class="screen-badge"><i class="fa-solid fa-magnifying-glass-location"></i> Screen 7</div>
+  <h1 class="screen-title">City Search</h1>
+  <p class="screen-sub">Find and add cities to your itinerary.</p>
+
+  <div class="search-box">
+    <div class="search-input-wrap">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="search" id="citySearch" placeholder="Search cities, countries…" oninput="filterCities()"/>
+    </div>
+    <select style="width:auto;min-width:120px;" onchange="filterCities()" id="regionFilter">
+      <option value="">All Regions</option>
+      <option>Europe</option>
+      <option>Asia</option>
+      <option>Americas</option>
+      <option>Middle East</option>
+    </select>
+  </div>
+
+  <div class="filter-row" id="filterChips">
+    <span class="chip chip-outline active" onclick="toggleChip(this,'all')">All</span>
+    <span class="chip chip-outline" onclick="toggleChip(this,'budget')">Budget-friendly</span>
+    <span class="chip chip-outline" onclick="toggleChip(this,'popular')">Most Popular</span>
+    <span class="chip chip-outline" onclick="toggleChip(this,'culture')">Culture</span>
+    <span class="chip chip-outline" onclick="toggleChip(this,'nature')">Nature</span>
+  </div>
+
+  <div id="cityList">
+    <!-- Cards rendered by JS -->
+  </div>
+</div>
+
+<!-- =================== SCREEN 10: PACKING =================== -->
+<div class="screen" id="s10">
+  <div class="screen-badge"><i class="fa-solid fa-suitcase-rolling"></i> Screen 10</div>
+  <h1 class="screen-title">Packing Checklist</h1>
+  <p class="screen-sub">Europe Grand Tour · Jun 1 – Jun 12</p>
+
+  <div class="card" style="margin-bottom:24px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+      <span id="packProgress" style="font-size:14px;font-weight:500;color:var(--ink);">4 of 14 packed</span>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-ghost btn-sm" onclick="resetAll()"><i class="fa-solid fa-arrow-rotate-left"></i> Reset</button>
+        <button class="btn btn-teal btn-sm" onclick="packAll()"><i class="fa-solid fa-check-double"></i> Pack All</button>
+      </div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="packBar" style="width:28%"></div></div>
+  </div>
+
+  <div id="packList"></div>
+
+  <div class="card" style="margin-top:8px;">
+    <p style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:10px;"><i class="fa-solid fa-plus" style="color:var(--amber)"></i> Add Custom Item</p>
+    <div class="add-item-row">
+      <input type="text" id="newItemName" placeholder="e.g. Travel pillow"/>
+      <select style="width:auto;min-width:130px;" id="newItemCat">
+        <option>Clothing</option>
+        <option>Documents</option>
+        <option>Electronics</option>
+        <option>Toiletries</option>
+        <option>Misc</option>
+      </select>
+      <button class="btn btn-amber btn-sm" onclick="addCustomItem()">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- =================== SCREEN 11: SHARED VIEW =================== -->
+<div class="screen" id="s11">
+  <div class="screen-badge"><i class="fa-solid fa-share-nodes"></i> Screen 11</div>
+  <h1 class="screen-title">Shared Itinerary</h1>
+  <p class="screen-sub">Public read-only view – anyone with the link can see this.</p>
+
+  <div class="shared-hero">
+    <div class="shared-trip-name">🇪🇺 Europe Grand Tour</div>
+    <div class="shared-meta">By Aryan Mehta · Jun 1 – Jun 12, 2025 · Shared publicly</div>
+    <div class="shared-stats">
+      <div class="shared-stat"><div class="n">12</div><div class="l">Days</div></div>
+      <div class="shared-stat"><div class="n">4</div><div class="l">Cities</div></div>
+      <div class="shared-stat"><div class="n">11</div><div class="l">Activities</div></div>
+      <div class="shared-stat"><div class="n" style="color:var(--amber)">$2.8k</div><div class="l">Budget</div></div>
+    </div>
+  </div>
+
+  <div class="share-bar">
+    <span class="share-url">https://traveloop.app/shared/eur-grand-tour-aryan-2025</span>
+    <button class="btn btn-ghost btn-sm" onclick="copyLink()"><i class="fa-solid fa-copy"></i> Copy Link</button>
+    <button class="btn btn-ghost btn-sm"><i class="fa-brands fa-twitter"></i></button>
+    <button class="btn btn-ghost btn-sm"><i class="fa-brands fa-whatsapp"></i></button>
+  </div>
+
+  <h2 style="font-family:'DM Serif Display',serif;font-size:20px;margin-bottom:16px;">Trip Stops</h2>
+
+  <div class="stop-card">
+    <div class="stop-num">1</div>
+    <div class="stop-info">
+      <div class="stop-city">🗼 Paris, France</div>
+      <div class="stop-dates">Jun 1 – Jun 4 · 3 nights</div>
+      <div class="stop-acts">
+        <span class="chip chip-teal">Eiffel Tower</span>
+        <span class="chip chip-teal">Louvre</span>
+        <span class="chip chip-amber">Seine Cruise</span>
+      </div>
+    </div>
+    <div style="font-size:13px;font-weight:600;color:var(--teal-dark)">$320</div>
+  </div>
+
+  <div class="stop-card">
+    <div class="stop-num">2</div>
+    <div class="stop-info">
+      <div class="stop-city">🌷 Amsterdam, Netherlands</div>
+      <div class="stop-dates">Jun 5 – Jun 7 · 2 nights</div>
+      <div class="stop-acts">
+        <span class="chip chip-teal">Anne Frank House</span>
+        <span class="chip chip-amber">Canal Boat</span>
+      </div>
+    </div>
+    <div style="font-size:13px;font-weight:600;color:var(--teal-dark)">$240</div>
+  </div>
+
+  <div class="stop-card">
+    <div class="stop-num">3</div>
+    <div class="stop-info">
+      <div class="stop-city">🏰 Prague, Czech Republic</div>
+      <div class="stop-dates">Jun 8 – Jun 10 · 2 nights</div>
+      <div class="stop-acts">
+        <span class="chip chip-teal">Prague Castle</span>
+        <span class="chip chip-coral">Old Town Walk</span>
+      </div>
+    </div>
+    <div style="font-size:13px;font-weight:600;color:var(--teal-dark)">$180</div>
+  </div>
+
+  <div class="stop-card">
+    <div class="stop-num">4</div>
+    <div class="stop-info">
+      <div class="stop-city">🎭 Vienna, Austria</div>
+      <div class="stop-dates">Jun 11 – Jun 12 · 1 night</div>
+      <div class="stop-acts">
+        <span class="chip chip-teal">Schönbrunn</span>
+        <span class="chip chip-amber">Concert</span>
+      </div>
+    </div>
+    <div style="font-size:13px;font-weight:600;color:var(--teal-dark)">$190</div>
+  </div>
+
+  <div style="text-align:center;margin-top:28px;">
+    <button class="copy-trip-btn" onclick="showToast('Trip copied to your plans!')">
+      <i class="fa-solid fa-copy"></i> Copy This Trip
+    </button>
+    <p style="font-size:12px;color:var(--ink-60);margin-top:10px;">Creates a new editable copy in your account</p>
+  </div>
+</div>
+
+<!-- =================== SCREEN 13: NOTES =================== -->
+<div class="screen" id="s13">
+  <div class="screen-badge"><i class="fa-solid fa-notebook"></i> Screen 13</div>
+  <h1 class="screen-title">Trip Notes & Journal</h1>
+  <p class="screen-sub">Europe Grand Tour · Jot down ideas, reminders, and memories.</p>
+
+  <div class="notes-toolbar">
+    <button class="btn btn-amber btn-sm" onclick="toggleNewNote()"><i class="fa-solid fa-plus"></i> New Note</button>
+    <select style="width:auto;" id="noteFilter" onchange="renderNotes()">
+      <option value="all">All Notes</option>
+      <option value="Paris">Paris</option>
+      <option value="Amsterdam">Amsterdam</option>
+      <option value="Prague">Prague</option>
+      <option value="Vienna">Vienna</option>
+    </select>
+  </div>
+
+  <div id="newNoteForm" style="display:none;">
+    <div class="new-note-form">
+      <input type="text" id="nnTitle" placeholder="Note title…"/>
+      <textarea id="nnBody" placeholder="Write your note here…"></textarea>
+      <div class="note-foot-bar">
+        <select style="width:auto;" id="nnStop">
+          <option>Paris</option>
+          <option>Amsterdam</option>
+          <option>Prague</option>
+          <option>Vienna</option>
+          <option>General</option>
+        </select>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-ghost btn-sm" onclick="toggleNewNote()">Cancel</button>
+          <button class="btn btn-amber btn-sm" onclick="saveNote()">Save Note</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="notesList"></div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== NAVIGATION =====
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const tabs=['s6','s7','s10','s11','s13'];
+  document.querySelectorAll('.nav-tab')[tabs.indexOf(id)].classList.add('active');
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+// ===== SCREEN 6 =====
+function setView(el,v){
+  document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  showToast('Switched to '+v+' view');
+}
+
+// ===== SCREEN 7 – CITY SEARCH =====
+const cities=[
+  {name:'Barcelona',country:'Spain',region:'Europe',emoji:'🇪🇸',cost:'$$',pop:'Very Popular',tags:['culture','popular']},
+  {name:'Tokyo',country:'Japan',region:'Asia',emoji:'🇯🇵',cost:'$$$',pop:'Popular',tags:['culture','popular']},
+  {name:'Lisbon',country:'Portugal',region:'Europe',emoji:'🇵🇹',cost:'$',pop:'Trending',tags:['budget','culture']},
+  {name:'Bali',country:'Indonesia',region:'Asia',emoji:'🇮🇩',cost:'$',pop:'Popular',tags:['budget','nature']},
+  {name:'New York',country:'USA',region:'Americas',emoji:'🇺🇸',cost:'$$$$',pop:'Very Popular',tags:['popular','culture']},
+  {name:'Marrakech',country:'Morocco',region:'Middle East',emoji:'🇲🇦',cost:'$',pop:'Trending',tags:['budget','culture']},
+  {name:'Kyoto',country:'Japan',region:'Asia',emoji:'🇯🇵',cost:'$$',pop:'Popular',tags:['culture','nature']},
+  {name:'Budapest',country:'Hungary',region:'Europe',emoji:'🇭🇺',cost:'$',pop:'Trending',tags:['budget','culture']},
+];
+let addedCities=new Set();
+function filterCities(){
+  const q=document.getElementById('citySearch').value.toLowerCase();
+  const r=document.getElementById('regionFilter').value;
+  const active=document.querySelector('#filterChips .chip.active')?.dataset?.filter||'all';
+  const filtered=cities.filter(c=>{
+    const matchQ=!q||c.name.toLowerCase().includes(q)||c.country.toLowerCase().includes(q);
+    const matchR=!r||c.region===r;
+    const matchT=active==='all'||c.tags.includes(active);
+    return matchQ&&matchR&&matchT;
+  });
+  renderCities(filtered);
+}
+function toggleChip(el,f){
+  document.querySelectorAll('#filterChips .chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  el.dataset.filter=f;
+  filterCities();
+}
+function renderCities(list){
+  const el=document.getElementById('cityList');
+  if(!list.length){el.innerHTML='<p style="color:var(--ink-60);text-align:center;padding:32px;">No cities found. Try a different search.</p>';return;}
+  el.innerHTML=list.map(c=>`
+    <div class="city-card">
+      <div class="city-thumb">${c.emoji}</div>
+      <div class="city-meta">
+        <div class="city-name">${c.name}</div>
+        <div class="city-country">${c.country} · ${c.region}</div>
+        <div class="city-badges">
+          <span class="badge badge-amber">${c.cost} Cost Index</span>
+          <span class="badge badge-teal">${c.pop}</span>
+          ${c.tags.includes('nature')?'<span class="badge badge-coral">Nature</span>':''}
+        </div>
+      </div>
+      <button class="add-btn ${addedCities.has(c.name)?'added':''}" onclick="toggleAddCity(this,'${c.name}')">
+        ${addedCities.has(c.name)?'<i class="fa-solid fa-check"></i> Added':'+ Add'}
+      </button>
+    </div>
+  `).join('');
+}
+function toggleAddCity(btn,name){
+  if(addedCities.has(name)){addedCities.delete(name);btn.innerHTML='+ Add';btn.classList.remove('added');showToast(name+' removed from trip');}
+  else{addedCities.add(name);btn.innerHTML='<i class="fa-solid fa-check"></i> Added';btn.classList.add('added');showToast(name+' added to your trip!');}
+}
+renderCities(cities);
+
+// ===== SCREEN 10 – PACKING =====
+const packData={
+  Clothing:[{name:'T-shirts (5x)',packed:true},{name:'Comfortable jeans',packed:false},{name:'Walking shoes',packed:true},{name:'Light jacket',packed:false},{name:'Formal shirt',packed:false}],
+  Documents:[{name:'Passport',packed:true},{name:'Travel insurance docs',packed:true},{name:'Hotel confirmations',packed:false},{name:'Visa printouts',packed:false}],
+  Electronics:[{name:'Phone charger',packed:false},{name:'Portable power bank',packed:false},{name:'Camera',packed:false}],
+  Toiletries:[{name:'Sunscreen SPF 50',packed:false},{name:'Toothbrush & paste',packed:false}]
+};
+function renderPack(){
+  const el=document.getElementById('packList');
+  let total=0,packed=0;
+  Object.entries(packData).forEach(([cat,items])=>{total+=items.length;packed+=items.filter(i=>i.packed).length;});
+  document.getElementById('packProgress').textContent=`${packed} of ${total} packed`;
+  document.getElementById('packBar').style.width=`${Math.round(packed/total*100)}%`;
+  el.innerHTML=Object.entries(packData).map(([cat,items])=>`
+    <div class="category-section">
+      <div class="cat-label"><i class="fa-solid ${catIcon(cat)}"></i> ${cat}</div>
+      ${items.map((item,i)=>`
+        <div class="check-item ${item.packed?'packed':''}" onclick="togglePack('${cat}',${i})">
+          <div class="custom-check"></div>
+          <span class="check-item-name">${item.name}</span>
+          <button class="del-btn" onclick="delItem(event,'${cat}',${i})"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+function catIcon(c){return{Clothing:'fa-shirt',Documents:'fa-file-lines',Electronics:'fa-plug',Toiletries:'fa-pump-soap',Misc:'fa-box'}[c]||'fa-box';}
+function togglePack(cat,i){packData[cat][i].packed=!packData[cat][i].packed;renderPack();}
+function delItem(e,cat,i){e.stopPropagation();packData[cat].splice(i,1);renderPack();showToast('Item removed');}
+function resetAll(){Object.values(packData).forEach(items=>items.forEach(i=>i.packed=false));renderPack();showToast('Checklist reset');}
+function packAll(){Object.values(packData).forEach(items=>items.forEach(i=>i.packed=true));renderPack();showToast('All items packed!');}
+function addCustomItem(){
+  const name=document.getElementById('newItemName').value.trim();
+  const cat=document.getElementById('newItemCat').value;
+  if(!name)return;
+  if(!packData[cat])packData[cat]=[];
+  packData[cat].push({name,packed:false});
+  document.getElementById('newItemName').value='';
+  renderPack();showToast('"'+name+'" added!');
+}
+renderPack();
+
+// ===== SCREEN 11 – SHARED =====
+function copyLink(){
+  navigator.clipboard?.writeText('https://traveloop.app/shared/eur-grand-tour-aryan-2025').catch(()=>{});
+  showToast('Link copied to clipboard!');
+}
+
+// ===== SCREEN 13 – NOTES =====
+let notes=[
+  {id:1,stop:'Paris',title:'Hotel check-in details',body:'Le Marais Hotel – check in after 2pm. Code: 4819. Breakfast included. Ask for quiet room facing courtyard.',ts:'May 28, 2025'},
+  {id:2,stop:'Amsterdam',title:'Bike rental tip',body:'Rent bikes from MacBike near Centraal Station. €10/day. Helmets optional but recommended. Lock both wheels!',ts:'May 29, 2025'},
+  {id:3,stop:'Prague',title:'Restaurant recommendation',body:'Lokál Dlouhááá – amazing Czech food. Reserve in advance. Order the svíčková (beef sirloin). Cash preferred.',ts:'May 30, 2025'},
+  {id:4,stop:'General',title:'Emergency contacts',body:'Travel insurance: +1-800-555-0199. Embassy London (for EU trip): +44-20-7499-9000. Family: +91-98765-43210.',ts:'May 25, 2025'},
+];
+let noteIdCounter=5;
+function renderNotes(){
+  const filter=document.getElementById('noteFilter').value;
+  const filtered=filter==='all'?notes:notes.filter(n=>n.stop===filter);
+  const el=document.getElementById('notesList');
+  if(!filtered.length){el.innerHTML='<p style="color:var(--ink-60);text-align:center;padding:40px;">No notes yet. Add one above!</p>';return;}
+  el.innerHTML=filtered.map(n=>`
+    <div class="note-card" id="nc${n.id}">
+      <div class="note-stop"><i class="fa-solid fa-location-dot" style="color:var(--amber)"></i> ${n.stop}</div>
+      <div class="note-title">${n.title}</div>
+      <div class="note-body">${n.body}</div>
+      <div class="note-foot">
+        <span class="note-ts"><i class="fa-regular fa-clock"></i> ${n.ts}</span>
+        <div class="note-actions">
+          <button class="icon-btn" title="Edit" onclick="editNote(${n.id})"><i class="fa-solid fa-pen"></i></button>
+          <button class="icon-btn" title="Delete" onclick="deleteNote(${n.id})" style="color:var(--coral)"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+function toggleNewNote(){
+  const f=document.getElementById('newNoteForm');
+  f.style.display=f.style.display==='none'?'block':'none';
+}
+function saveNote(){
+  const title=document.getElementById('nnTitle').value.trim();
+  const body=document.getElementById('nnBody').value.trim();
+  const stop=document.getElementById('nnStop').value;
+  if(!title||!body){showToast('Please fill in both fields');return;}
+  const now=new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+  notes.unshift({id:noteIdCounter++,stop,title,body,ts:now});
+  document.getElementById('nnTitle').value='';
+  document.getElementById('nnBody').value='';
+  toggleNewNote();
+  renderNotes();showToast('Note saved!');
+}
+function deleteNote(id){
+  notes=notes.filter(n=>n.id!==id);
+  renderNotes();showToast('Note deleted');
+}
+function editNote(id){
+  showToast('Edit mode – feature coming soon!');
+}
+renderNotes();
+</script>
+</body>
+</html>
