@@ -43,3 +43,33 @@ exports.addActivity = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+// Reorder Stops
+exports.reorderStops = async (req, res) => {
+  try {
+    const { itineraryId, newOrder } = req.body;
+
+    const itinerary = await Itinerary.findById(itineraryId);
+
+    if (!itinerary) {
+      return res.status(404).json({ message: "Itinerary not found" });
+    }
+
+    if (newOrder.length !== itinerary.stops.length) {
+      return res.status(400).json({ message: "Invalid order array" });
+    }
+
+    const reorderedStops = [];
+
+    newOrder.forEach(index => {
+      reorderedStops.push(itinerary.stops[index]);
+    });
+
+    itinerary.stops = reorderedStops;
+
+    await itinerary.save();
+
+    res.json(itinerary);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

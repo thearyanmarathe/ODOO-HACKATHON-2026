@@ -7,14 +7,14 @@ dotenv.config();
 connectDB();
 
 const app = express();
-
+console.log("SERVER STARTED");
 app.use(cors());
 app.use(express.json());
-
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/trips", require("./routes/tripRoutes"));
-app.use("/api/itinerary", require("./routes/itineraryRoutes"));
+app.use("/api/itinerary", require("./routes/itinerary.routes"));
+app.use("/api/budget", require("./routes/budgetRoutes"));
 
 const PORT = process.env.PORT || 5000;
 

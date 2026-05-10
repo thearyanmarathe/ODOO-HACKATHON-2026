@@ -30,3 +30,24 @@ exports.deleteTrip = async (req, res) => {
   await Trip.findByIdAndDelete(req.params.id);
   res.json({ message: "Deleted" });
 };
+const Itinerary = require("../models/Itinerary");
+const Budget = require("../models/Budget");
+
+// Get Full Trip Summary
+exports.getTripSummary = async (req, res) => {
+  try {
+    const tripId = req.params.id;
+
+    const trip = await Trip.findById(tripId);
+    const itinerary = await Itinerary.findOne({ trip: tripId });
+    const budget = await Budget.findOne({ trip: tripId });
+
+    res.json({
+      trip,
+      itinerary,
+      budget
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
